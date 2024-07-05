@@ -28,7 +28,6 @@ const Write = () => {
     if (typeof window !== "undefined") {
       const upload = () => {
         const uniqueName = new Date().getTime() + file.name;
-        const storage = getStorage();
         const storageRef = ref(storage, uniqueName);
         const uploadTask = uploadBytesResumable(storageRef, file);
 
