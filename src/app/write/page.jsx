@@ -2,8 +2,15 @@
 import Image from "next/image"
 import styles from "./write.module.css"
 import { useEffect, useState } from "react";
-import ReactQuill from "react-quill";
+// import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css"
+import dynamic from 'next/dynamic';
+const ReactQuill = dynamic(() => import("react-quill"), 
+    { 
+        loading: () => <p>Editor Loading...</p>, 
+        ssr: false 
+    }
+);
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
