@@ -23,7 +23,7 @@ export const MenuPosts = async ({ withImage }) => {
   return (
     <div className={styles.items}>
       {data?.map(item => (
-        <Link href={`/posts/${item.slug}`} className={styles.item}>
+        <Link key={item.slug} href={`/posts/${item.slug}`} className={styles.item}>
           {withImage && item.img &&
             (<div className={styles.imageContainer}>
               <Image src={item.img} alt='' fill className={styles.image} />
