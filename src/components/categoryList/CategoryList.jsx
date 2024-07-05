@@ -3,8 +3,12 @@ import styles from "./categoryList.module.css"
 import Link from 'next/link'
 import Image from 'next/image'
 
+const baseUrl = process.env.NODE_ENV === 'development'
+  ? 'http://localhost:3000'
+  : 'https://blogify-lake.vercel.app';
+
 const getData = async () => {
-  const response = await fetch("http://localhost:3000/api/categories", {
+  const response = await fetch(`${baseUrl}/api/categories`, {
     cache: "no-store",
   });
 

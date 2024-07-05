@@ -6,6 +6,10 @@ import useSWR from "swr";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 
+const baseUrl = process.env.NODE_ENV === 'development'
+  ? 'http://localhost:3000'
+  : 'https://blogify-lake.vercel.app';
+
 const fetcher = async (url) => {
 
     const res = await fetch(url)
@@ -25,7 +29,7 @@ const Comments = ({postSlug}) => {
 
     const {status} = useSession();
 
-    const { data, mutate, isLoading } = useSWR(`http://localhost:3000/api/comments?postSlug=${postSlug}`, fetcher);
+    const { data, mutate, isLoading } = useSWR(`${baseUrl}/api/comments?postSlug=${postSlug}`, fetcher);
 
     const [desc, setDesc] = useState("");
 

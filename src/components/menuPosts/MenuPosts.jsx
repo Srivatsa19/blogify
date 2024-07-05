@@ -3,8 +3,12 @@ import Link from 'next/link'
 import React from 'react'
 import styles from "./menuPosts.module.css"
 
+const baseUrl = process.env.NODE_ENV === 'development'
+  ? 'http://localhost:3000'
+  : 'https://blogify-lake.vercel.app';
+
 const getData = async () => {
-  const response = await fetch("http://localhost:3000/api/mostPopular", {
+  const response = await fetch(`${baseUrl}/api/mostPopular`, {
     cache: "no-store",
   });
 
