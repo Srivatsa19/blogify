@@ -25,6 +25,7 @@ export const SinglePage = async ({params}) => {
   const {slug} = params;
 
   const data = await getData(slug);
+  console.log(data)
 
   return (
     <div className={styles.container}>
@@ -37,7 +38,7 @@ export const SinglePage = async ({params}) => {
             </div>)}
             <div className={styles.userTextContainer}>
               <span className={styles.username}>{data?.user.name}</span>
-              <span className={styles.date}>11.02.2023</span>
+              <span className={styles.date}>{data?.createdAt}</span>
             </div>
           </div>
         </div>

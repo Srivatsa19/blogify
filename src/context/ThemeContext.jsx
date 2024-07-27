@@ -6,7 +6,6 @@ export const ThemeContext = createContext();
 
 const getThemeFromLocalStorage = () => {
     if (typeof window !== "undefined") { // if only it is a client component
-        console.log("yeah");
         const value = localStorage.getItem("theme");
         return value || "light"; // first time the local storage will be empty so the default theme is light
     }
