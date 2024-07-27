@@ -60,7 +60,7 @@ const Comments = ({postSlug}) => {
                         {item?.user?.image && <Image src={item.user.image} width={50} height={50} className={styles.image} />}
                         <div className={styles.userInfo}>
                             <span className={styles.username}>{item.user.name}</span>
-                            <span className={styles.date}>{item.createdAt}</span>
+                            <span className={styles.date}>{item.createdAt.substring(0, 10)}</span>
                         </div>
                     </div>
                     <p className={styles.desc}>
