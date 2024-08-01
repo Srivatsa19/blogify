@@ -8,7 +8,7 @@ const baseUrl = process.env.NODE_ENV === 'development'
   : 'https://blogify-lake.vercel.app';
 
 const getData = async () => {
-  const response = await fetch(`${baseUrl}/api/mostPopular`, {
+  const response = await fetch(`${baseUrl}/api/mostPopular?take=${4}`, {
     cache: "no-store",
   });
 

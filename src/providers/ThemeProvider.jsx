@@ -9,7 +9,7 @@ export const ThemeProvider = ({children}) => {
 
     useEffect(() => {
         setMounted(true);
-    }, [])
+    }, []) // making sure it is a client side component
 
     if (mounted) {
         return (

@@ -1,11 +1,13 @@
 import prisma from "@/utils/connect"
 import { NextResponse } from "next/server"
 
-export const GET = async () => {
+export const GET = async (req) => {
+    const {searchParams} = new URL(req.url);
+    const take = searchParams.get("take");
     try {
         const posts = await prisma.post.findMany({
             orderBy: { views: 'desc' },
-            take: 4,
+            take: parseInt(take),
             include: {user: true},
         });
         return new NextResponse(JSON.stringify(posts, {status: 200}))

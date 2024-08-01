@@ -1,23 +1,44 @@
 import React from 'react'
 import styles from "./featured.module.css"
 import Image from 'next/image'
+import Link from 'next/link'
 
-const Featured = () => {
+const baseUrl = process.env.NODE_ENV === 'development'
+  ? 'http://localhost:3000'
+  : 'https://blogify-lake.vercel.app';
+
+const getData = async () => {
+  const response = await fetch(`${baseUrl}/api/mostPopular?take=${1}`, {
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed")
+  }
+
+  return response.json()
+
+}
+
+const Featured = async () => {
+  const data = await getData();
   return (
     <div className={styles.container}>
         <h1 className={styles.title}>
           <b>Hey, Blogify here!</b> Discover new stories and creative ideas.
         </h1>
         <div className={styles.post}>
-          <div className={styles.imgContainer}>
-            <Image src="/p1.jpeg" alt='' fill/>
-          </div>
+          {data[0].img &&
+            (<div className={styles.imgContainer}>
+              <Image src={data[0].img} alt='' fill className={styles.image} />
+            </div>)
+          }
           <div className={styles.textContainer}>
-            <h1 className={styles.postTitle}>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
-            <p className={styles.postDesc}>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui adipisci asperiores molestias esse nostrum, aliquid odit, corporis aperiam modi nobis itaque fuga consectetur. Laborum ipsum accusantium ab laboriosam enim corrupti.   
-            </p>
-            <button className={styles.button}>Read More</button>
+            <h1 className={styles.postTitle}>{data[0].title}</h1>
+            <div className={styles.postDesc} dangerouslySetInnerHTML={{ __html: data[0]?.desc }} />
+            <Link href={`/posts/${data[0].slug}`}>
+              <button className={styles.button}>Read More</button>
+            </Link>
           </div>
         </div>
     </div>
